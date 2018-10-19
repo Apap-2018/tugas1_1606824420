@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Home</title>	
+	 <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+	 <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+	 <nav th:replace="fragments/fragment :: navbar"></nav>
+	
+	<div class="container-fluid">
+		<h2>Sistem Informasi Kepegawaian</h2>
+		<p> Selamat datang di Sistem Informasi Kepegawaian <p>
+		<div class="row">
+			<div class="col-md-6">
+				<h2>Lihat Data Berdasarkan NIP</h2>
+					<form th:action="@{/pegawai}" method="GET">
+						<div class="card-body">
+							<label for="nip">Masukan Nomor Induk Pegawai</label>
+							<input type="text" name="nip" class="form-control"/>
+							<button type="submit" class="btn btn-primary">Lihat</button>
+						</div>
+					</form>
+					<h2>Lihat Detail Jabatan</h2>
+					<form th:action="@{/jabatan/view}" method="GET">
+						<div class="card-body">
+							<div class="form-group">
+            				<label for="jabatanInput">Pilih Jabatan</label>
+            				<select class="form-control custom-select" id="jabatanInput" name="idJabatan" required>
+                            <option selected disabled>Pilih Jabatan</option>
+                            <option th:each="l : ${listJabatan}" th:value="${l.id}" th:text="${l.nama}">
+    						</option>
+                            <th:block th:each="jabatan : ${allJabatan}">
+                            <option th:value="${jabatan.id}" th:text="${jabatan.nama}"></option>
+                             </th:block>
+                             </select>
+			            	</div>
+							<button type="submit" class="btn btn-primary">Lihat</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
