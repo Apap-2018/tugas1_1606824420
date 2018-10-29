@@ -1,6 +1,10 @@
 package com.apap.Tugas1.service;
 
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -33,6 +37,46 @@ public class PegawaiServiceImpl implements PegawaiService {
 	public List<PegawaiModel> getPegawaiByInstansi(InstansiModel instansi) {
 		// TODO Auto-generated method stub
 		return pegawaiDb.findByInstansi(instansi);
+	}
+
+	@Override
+	public String generateNip(PegawaiModel pegawai) {
+		DateFormat df = new SimpleDateFormat("ddMMYY");
+		Date tglLahir = pegawai.getTanggal_lahir();
+		String formatted = df.format(tglLahir);
+		System.out.println("date->"+formatted);
+		
+		Long kodeInstansi = pegawai.getInstansi().getId();
+		System.out.println("kode instansi->"+kodeInstansi);
+		
+		int idAkhir = 0;
+		for (PegawaiModel peg : findAllPegawai()) {
+			if (peg.getTanggal_lahir().equals(pegawai.getTanggal_lahir()) && peg.getTahun_masuk().equals(pegawai.getTahun_masuk())) {
+				idAkhir+=1;
+			}
+		}
+		idAkhir+=1;
+		
+		String kodeMasuk = "";
+		if (idAkhir<10) {
+			kodeMasuk = "0"+idAkhir;
+		}
+		else {
+			kodeMasuk = Integer.toString(idAkhir);
+		}
+		
+		System.out.println(kodeInstansi+formatted+pegawai.getTahun_masuk()+kodeMasuk);
+		return kodeInstansi+formatted+pegawai.getTahun_masuk()+kodeMasuk;
+	}
+
+	@Override
+	public Optional<PegawaiModel> getPegawaiById(long id) {
+		return pegawaiDb.findById(id);
+	}
+
+	@Override
+	public void addPegawai(PegawaiModel pegawai) {
+		pegawaiDb.save(pegawai);
 	}
 
 

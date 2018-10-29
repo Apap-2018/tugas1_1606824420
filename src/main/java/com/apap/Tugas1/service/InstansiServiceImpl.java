@@ -34,17 +34,16 @@ public class InstansiServiceImpl implements InstansiService {
 		return InstansiDb.findAll();
 	}
 
-/**	@Override
-	public Optional<InstansiModel> getInstansiDetailById(Long idInstansi) {
-		// TODO Auto-generated method stub
-		return InstansiDb.findById(idInstansi);
-	}
-**/
 	@Override
 	public Optional<InstansiModel> getInstansiById(Long id) {
 		// TODO Auto-generated method stub
 		return InstansiDb.findById(id);
 	}
 
+	@Override
+	public void addInstansi(InstansiModel instansi) {
+		InstansiDb.save(instansi);
+		
+	}
 
 }

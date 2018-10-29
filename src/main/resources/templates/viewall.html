@@ -1,37 +1,47 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-	<title>View All</title>	
-	 <object th:include="fragments/fragment :: css" th:remove="tag"></object>
-	 <object th:include="fragments/fragment :: js" th:remove="tag"></object>
-</head>
-<div id="Content" class="container-full-bg">
-    <div class="container vertical-center" style="padding-top: 32px;">
-        <h1>Lihat Semua Jabatan</h1>
-        <div class="table-responsive table">
-        	<table class="table table-hover" id="myTable">
-			<thead>
-				<th>Nama</th>
-				<th>Deskripsi</th>
-				<th>Gaji Poko</th>
-			</thead>
-			<span th:each="jabatan : ${listJabatan}">
-				<tr>
-					<td th:text="${jabatan.nama}"></td>
-					<td th:text="${jabatan.deskripsi}"></td>
-					<td th:text="${jabatan.gajiPokok}"></td>
+
+	<head>		
+		<object th:include="fragments/fragment :: title" th:remove="tag"></object>
+		<object th:include="fragments/fragment :: css" th:remove="tag"></object>
+		<object th:include="fragments/fragment :: js" th:remove="tag"></object>
+		<script type="text/javascript" charset="utf8" src="	https://code.jquery.com/jquery-3.3.1.js"></script>
+		<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+	</head>
+	
+	<body>
+		<nav th:replace="fragments/fragment :: navbar"></nav>
+		
+		<br>
+		<h2 style="margin-left:10px">Lihat Semua Jabatan</h2>
+		<hr>
+	
+		<div style="margin-left:10px; margin-right:10px; margin-bottom:10px">	
+		<table id="table_id" class="display">
+		    <thead>
+		        <tr>
+			        <th>Nama</th>
+					<th>Deskripsi</th>
+					<th>Gaji Pokok</th>
+		        </tr>
+		    </thead>
+		    <tbody>
+		        <tr th:each="jabatan : ${listJabatan}">
+					<td><p th:text="${jabatan.nama}"></p></td>
+					<td><p th:text="${jabatan.deskripsi}"></p></td>
+					<td><p th:text="${jabatan.gajiPokok}"></p></td>
 				</tr>
-			</span>
+		    </tbody>
 		</table>
+			
+		<script>
+		
+			$(document).ready( function () {
+			    $('#table_id').DataTable();
+			} );
+		
+		</script>
+		
 	</body>
-	
-	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
-  
-	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
-	
-	<script>
-	$(document).ready( function () {
-	    $('#searchResult').DataTable();
-	} );
-	</script>
-</html>	
+</html>

@@ -13,6 +13,7 @@ public interface InstansiService {
 	List<InstansiModel> findAllInstansi();
 
 	Optional<InstansiModel> getInstansiById(Long id);
+	void addInstansi (InstansiModel instansi);
 
 	//Optional<InstansiModel> getInstansiDetailById(Optional<Long> id_Instansi);
 
