@@ -20,5 +20,7 @@ public interface JabatanService {
 	void deleteById(Long id);
 
 	void deleteJabatan(JabatanModel jabatan);
+
+	List<JabatanModel> getAllJabatan();
 }
 

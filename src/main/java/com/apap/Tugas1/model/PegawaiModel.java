@@ -2,6 +2,8 @@ package com.apap.Tugas1.model;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -129,7 +131,17 @@ public class PegawaiModel implements Serializable {
 	public void setJabatanPegawaiList(List<JabatanModel> jabatanPegawaiList) {
 		this.jabatanPegawaiList = jabatanPegawaiList;
 	}
-	
+
+	public int calculateUmur() {
+		  Date now = new Date(id);
+		  DateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+		  int d1 = Integer.parseInt(formatter.format(tanggal_lahir));
+		  int d2 = Integer.parseInt(formatter.format(now));
+		  int age = (d2 - d1)/1000;   
+		  return age;
+	}
+
+
 	
 	
 }

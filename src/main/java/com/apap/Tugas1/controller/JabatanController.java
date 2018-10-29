@@ -58,17 +58,13 @@ public class JabatanController {
 		}
 		return "error";
 	}
-/**	@RequestMapping(value="/jabatan/delete/{id}", method=RequestMethod.POST)
-	private String deleteDealer(@PathVariable(value = "id") Long Id, Model model) {
-		if(jabatanService.getJabatanById(Id).isPresent()) {
-			JabatanModel temp = jabatanService.getJabatanById(Id).get();
-			jabatanService.deleteById(temp);
-			return "delete";
-		}
-		model.addAttribute("title", "Delete Jabatan");
-		return "error";
-	
-	}**/
+	@RequestMapping(value = "/jabatan/viewall", method = RequestMethod.GET)
+	public String ubahJabatan (Model model) {
+		List<JabatanModel> listJabatan = jabatanService.getAllJabatan();
+		model.addAttribute("listJabatan", listJabatan);
+		
+		return "viewall";
+	}
 }
 
 		

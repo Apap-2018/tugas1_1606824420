@@ -40,6 +40,19 @@
 							<button type="submit" class="btn btn-primary">Lihat</button>
 						</div>
 					</form>
+						<div class="container" style="padding-left:5px">
+						<h2>Lihat Pegawai Tertua dan Termuda</h2>
+						<form th:action="@{/pegawai/termuda-tertua}" method="GET">
+						<h4>Pilih Instansi</h4>
+						<br>
+
+						<select name="idInstansi">
+    						<option th:each="l : ${listInstansi}" th:value="${l.id}" th:text="${l.nama} + ' - ' + ${l.provinsi.nama}">
+    						</option>
+						</select>
+			
+						<button class="btn btn-primary btn-lg" type="submit">Lihat</button>
+				</form>
 				</div>
 			</div>
 		</div>
